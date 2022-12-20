@@ -333,10 +333,7 @@ zinit snippet OMZ::lib
 setopt promptsubst
 
 zinit wait lucid for \
-        OMZL::git.zsh \
-        OMZL::functions.zsh \
-  atload"unalias grv" \
-        OMZP::git
+        OMZL::functions.zsh
 
 # load omz plugins
 zinit snippet OMZP::tmux
