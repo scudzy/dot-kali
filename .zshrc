@@ -426,6 +426,10 @@ function settitle () {
 # load at startup
 fortune | cowsay -f tux
 
+# load function folders ----------- NEVER DELETE BELOW RHIS LINE
+fpath=( $DOTFILES/functions "${fpath[@]}" )
+autoload -Uz $fpath[1]/*(.:t)
+
 ### This should be the last line
 ### zsh builtin AUTOLOAD
 autoload -Uz compinit
