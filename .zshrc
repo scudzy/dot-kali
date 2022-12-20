@@ -417,20 +417,16 @@ export FZF_DEFAULT_OPTS="--ansi"
 # grc
 [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
+# Windows Terminal
+function settitle () {
+  export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$'
+  echo -ne '\033]0;'"$1"'\a'
+}
 
+# load at startup
+fortune | cowsay -f tux
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### This should be the last line
+### zsh builtin AUTOLOAD
+autoload -Uz compinit
+compinit -i
