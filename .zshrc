@@ -385,8 +385,8 @@ zinit light romkatv/powerlevel10k
 
 ### End of zinit line
 
-# # romkat/gitstatus
-# source ~/.local/share/zinit/plugins/romkatv---gitstatus/gitstatus.plugin.sh
+# z.lua
+eval "$(lua ~/.dotfiles/z.lua/z.lua --init zsh enhanced once fzf)"
 
 # powerline
 /usr/bin/powerline-daemon -q
