@@ -304,6 +304,8 @@ export PULSE_SERVER=tcp:"$WSL2IP"
 export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$WSL2IP:0.0
 export NO_AT_BRIDGE=1
+export DELTA_FEATURES='+side-by-side my-feature'
+export HOMEBREW_NO_ENV_HINTS=TRUE
 
 ### Zinit
 zinit light zsh-users/zsh-completions
