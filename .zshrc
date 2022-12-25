@@ -1,3 +1,7 @@
+start="$(date +%s)"
+zmodload zsh/zprof
+zmodload -i zsh/complist
+#zstyle ':omz:update' mode auto
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -298,11 +302,16 @@ fi
 
 ### Env Var
 export DOTFILES=~/.dotfiles
-export PATH="${HOME}/.local/bin:${HOME}:$PATH"
-WSL2IP=$(/sbin/ip route | awk '/default/ { print $3 }')
-export PULSE_SERVER=tcp:"$WSL2IP"
+#export PATH="${HOME}/.local/bin:/c/Windows/System32/:${HOME}:$PATH"
+export PATH="${HOME}/.local/bin:/c/Windows/System32/:/c/Users/scudzy/scoop/apps/vscode/current/:${HOME}:$PATH"
+# WSL2IP=$(/sbin/ip route | awk '/default/ { print $3 }'):0.0
+# WSL2IP=$(/sbin/ip route | awk '{print $3; exit;}'):0
+# WSL2IP="`ip -4 address | grep -A1 eth0 | grep inet | cut -d' ' -f6 | cut -d/ -f1`:0.0"
+# export DISPLAY=$(ipconfig.exe | awk '/IPv4/ {sub("\r",":0"); print $NF;exit}')
+# export DISPLAY=$WSL2IP
+export DISPLAY=192.168.1.120:0
+# export PULSE_SERVER="$WSL2IP"
 export LIBGL_ALWAYS_INDIRECT=1
-export DISPLAY=$WSL2IP:0.0
 export NO_AT_BRIDGE=1
 export DELTA_FEATURES='+side-by-side my-feature'
 export HOMEBREW_NO_ENV_HINTS=TRUE
@@ -328,7 +337,7 @@ zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
 zinit load zdharma-continuum/zsh-diff-so-fancy
 
 # omz lib
-zinit ice svn pick"completion.zsh" src"git.zsh"
+zinit ice svn pick"completion.zsh" #src"git.zsh"
 zinit snippet OMZ::lib
 
 # omz
@@ -367,8 +376,8 @@ zinit wait"1" lucid from"gh-r" as"null" for \
      sbin"exa* -> exa"  ogham/exa
 
 # vim/vim
-zinit ice as"program" atclone"rm -f src/auto/config.cache; ./configure" \
- atpull"%atclone" make pick"src/vim"
+#zinit ice as"program" atclone"rm -f src/auto/config.cache; ./configure" \
+# atpull"%atclone" make pick"src/vim"
 zinit light vim/vim
 
 # forgit
@@ -424,13 +433,20 @@ function settitle () {
 }
 
 # load at startup
-fortune | cowsay -f tux
+fortune debian-hints | cowsay -f tux
+#fortune | cowsay -f tux
 
 # load function folders ----------- NEVER DELETE BELOW RHIS LINE
 fpath=( $DOTFILES/functions "${fpath[@]}" )
 autoload -Uz $fpath[1]/*(.:t)
 
-### This should be the last line
-### zsh builtin AUTOLOAD
-autoload -Uz compinit
-compinit -i
+# ### This should be the last line
+# ### zsh builtin AUTOLOAD
+# autoload -Uz compinit
+# compinit -i
+
+# Execution time
+end="$(date +%s)"
+total="$(( end - start ))"
+echo ""
+printf "\e[0;97m 💠 Loading your blazing 🚀 fast ⚡ shell in\e[39m \e[1;92;5m$total\e[0m 🔥 \e[0;97mseconds 👻 \e[0m\n"
