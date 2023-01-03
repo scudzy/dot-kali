@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # execution time
 function tm() {
   local start=$(date +%s%N)

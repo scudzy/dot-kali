@@ -1,6 +1,4 @@
-#!/usr/bin/env zsh
-
-# Sublime Text 4
+#Sublime Text 4
 
 function st4() {
     /c/Program\ Files/Sublime\ Text/sublime_text.exe "$@"

@@ -1,7 +1,5 @@
-#!/usr/bin/env bash
-
 # Vscode
 
 function code() {
-    /c/Users/scudzy/scoop/apps/vscode/current/Code.exe $@
+       /c/Users/scudzy/AppData/Local/Programs/Microsoft\ VS\ Code/code.exe
 }

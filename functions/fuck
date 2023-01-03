@@ -1,5 +1,4 @@
-#!/usr/bin/env zsh
-
+# thefuck function
 function fuck() {
                 TF_PYTHONIOENCODING=$PYTHONIOENCODING;
                 export TF_SHELL=zsh;
