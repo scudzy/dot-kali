@@ -301,20 +301,20 @@ if grep -q microsoft /proc/version; then
 fi
 
 ### Env Var
-export DOTFILES=~/.dotfiles
-#export PATH="${HOME}/.local/bin:/c/Windows/System32/:${HOME}:$PATH"
-export PATH="${HOME}/.local/bin:/c/Windows/System32/:/c/Users/scudzy/scoop/apps/vscode/current/:${HOME}:$PATH"
-# WSL2IP=$(/sbin/ip route | awk '/default/ { print $3 }'):0.0
-# WSL2IP=$(/sbin/ip route | awk '{print $3; exit;}'):0
-# WSL2IP="`ip -4 address | grep -A1 eth0 | grep inet | cut -d' ' -f6 | cut -d/ -f1`:0.0"
-# export DISPLAY=$(ipconfig.exe | awk '/IPv4/ {sub("\r",":0"); print $NF;exit}')
-# export DISPLAY=$WSL2IP
-export DISPLAY=192.168.1.120:0
-# export PULSE_SERVER="$WSL2IP"
-export LIBGL_ALWAYS_INDIRECT=1
-export NO_AT_BRIDGE=1
-export DELTA_FEATURES='+side-by-side my-feature'
-export HOMEBREW_NO_ENV_HINTS=TRUE
+# export DOTFILES=~/.dotfiles
+# export PATH="${HOME}/.local/bin:/c/Windows/System32/:${HOME}:$PATH"
+# export PATH="${HOME}/.local/bin:/c/Windows/System32/:/c/Users/scudzy/scoop/apps/vscode/current/:${HOME}:$PATH"
+# # WSL2IP=$(/sbin/ip route | awk '/default/ { print $3 }'):0.0
+# # WSL2IP=$(/sbin/ip route | awk '{print $3; exit;}')
+# # WSL2IP="`ip -4 address | grep -A1 eth0 | grep inet | cut -d' ' -f6 | cut -d/ -f1`:0.0"
+# # export DISPLAY=$(ipconfig.exe | awk '/IPv4/ {sub("\r",":0"); print $NF;exit}')
+# export DISPLAY=192.168.1.120:0
+# # export DISPLAY=$WSL2IP:0
+# export PULSE_SERVER="192.168.1.120"
+# export LIBGL_ALWAYS_INDIRECT=1
+# export NO_AT_BRIDGE=1
+# export DELTA_FEATURES='+side-by-side my-feature'
+# export HOMEBREW_NO_ENV_HINTS=TRUE
 
 ### Zinit
 zinit light zsh-users/zsh-completions
@@ -407,6 +407,20 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=info:#73d0ff,prompt:#707a8c,pointer:#cbccc6
     --color=marker:#73d0ff,spinner:#73d0ff,header:#d4bfff'
 
+# browserpass gnupg
+PIDFOUND=$(pgrep gpg-agent)
+if [ -n "$PIDFOUND" ]; then
+    export GPG_AGENT_INFO="$HOME/.gnupg/S.gpg-agent:$PIDFOUND:1"
+    export GPG_TTY=$(tty)
+    export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
+    unset SSH_AGENT_PID
+fi
+PIDFOUND=$(pgrep dirmngr)
+if [ -n "$PIDFOUND" ]; then
+    export DIRMNGR_INFO="$HOME/.gnupg/S.dirmngr:$PIDFOUND:1"
+fi
+unset PIDFOUND
+
 # omp
 # eval "$(oh-my-posh init zsh --config '/home/linuxbrew/.linuxbrew/opt/oh-my-posh/themes/negligible.omp.json')"
 
@@ -432,18 +446,17 @@ function settitle () {
   echo -ne '\033]0;'"$1"'\a'
 }
 
-# load at startup
-fortune debian-hints | cowsay -f tux
-#fortune | cowsay -f tux
-
 # load function folders ----------- NEVER DELETE BELOW RHIS LINE
 fpath=( $DOTFILES/functions "${fpath[@]}" )
 autoload -Uz $fpath[1]/*(.:t)
 
+# load at startup
+cowsayfortune
+
 # ### This should be the last line
 # ### zsh builtin AUTOLOAD
-# autoload -Uz compinit
-# compinit -i
+autoload -Uz compinit
+compinit -i
 
 # Execution time
 end="$(date +%s)"
