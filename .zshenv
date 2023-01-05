@@ -37,12 +37,12 @@ export PATH="${HOME}/.local/bin:${HOME}/.dotfiles/sh:/c/Windows/System32/:$PATH"
 #export PATH="${HOME}/.local/bin:${HOME}/dotfiles/sh:${HOME}/.local/lib/python3.9/site-packages:/c/Windows/System32/:$PATH"
 
 # WSL2IP=$(/sbin/ip route | awk '/default/ { print $3 }'):0.0
-# WSL2IP=$(/sbin/ip route | awk '{print $3; exit;}')
+WSL2IP=$(/sbin/ip route | awk '{print $3; exit;}')
 # WSL2IP="`ip -4 address | grep -A1 eth0 | grep inet | cut -d' ' -f6 | cut -d/ -f1`:0.0"
 # export DISPLAY=$(ipconfig.exe | awk '/IPv4/ {sub("\r",":0"); print $NF;exit}')
-export DISPLAY=192.168.1.120:0
-# export DISPLAY=$WSL2IP:0
-export PULSE_SERVER=tcp:"$DISPLAY"
+# export DISPLAY=192.168.1.120:0
+export DISPLAY=$WSL2IP:0
+# export PULSE_SERVER=tcp:"$DISPLAY"
 export LIBGL_ALWAYS_INDIRECT=1
 export NO_AT_BRIDGE=1
 export DELTA_FEATURES='+side-by-side my-feature'
