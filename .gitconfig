@@ -6,6 +6,8 @@
 	helper = !/usr/bin/gh auth git-credential
 [diff]
 	tool = vimdiff
+[merge]
+	merge = vimdiff
 [pager]
 	diff = delta
 	log = delta
