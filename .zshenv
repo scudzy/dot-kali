@@ -33,7 +33,7 @@ export PASSWORD_STORE_GENERATED_LENGTH="20"
 export RCLONE_PASSWORD_COMMAND="pass garbage/wsl2/rclone-deb10"
 export COWPATH="${HOME}/.cowsay/cowfiles:$COWPATH"
 # If you come from bash you might have to change your $PATH.
-export PATH="${HOME}/.local/bin:${HOME}/.dotfiles/sh:/c/Windows/System32/:$PATH"
+export PATH="${HOME}/.local/bin:${HOME}/.dotfiles/sh:/c/Windows/System32:$PATH"
 #export PATH="${HOME}/.local/bin:${HOME}/dotfiles/sh:${HOME}/.local/lib/python3.9/site-packages:/c/Windows/System32/:$PATH"
 
 # WSL2IP=$(/sbin/ip route | awk '/default/ { print $3 }'):0.0
